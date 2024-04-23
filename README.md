@@ -50,6 +50,32 @@ Kmeans = KMeans(n_clusters=k)
 # Fit the dats
 Kmeans.fit(X)
 
+
+# define colors for each cluster
+colors = ['r', 'g', 'b', 'c', 'm']
+
+# plotting the controls
+for i in range(k):
+  cluster_points = X[labels == i]
+  plt.scatter(cluster_points['Annual Income (k$)'], cluster_points['Spending Score (1-100)'], color=colors[i], label=f'Cluster {i+1}')
+
+  #Find minimum enclosing circle
+  distances = euclidean_distances(cluster_points, [centroids[i]])
+  radius = np.max(distances)
+
+  circle = plt.Circle(centroids[i], radius, color=colors[i], fill=False)
+  plt.gca().add_patch(circle)
+
+#Plotting the centroids
+plt.scatter(centroids[:, 0], centroids[:, 1], marker='o', s=200, color='k', label='Centroids')
+
+plt.title('K-means Clustering')
+plt.xlabel("Annual Income (k$)")
+plt.ylabel('Spending Score (1-100)')
+plt.legend()
+plt.grid(True)
+plt.axis('equal') # Ensure aspect ratio is equal
+plt.show()
 ```
 
 ## Output:
@@ -63,6 +89,7 @@ Kmeans.fit(X)
 ![Screenshot 2024-04-23 134516](https://github.com/syedmokthiyar/Implementation-of-K-Means-Clustering-for-Customer-Segmentation/assets/118787294/26e7bacc-5b82-43fd-b011-59fe2da03a52)
 
 # K-MEANS CLUSTER:
+![Screenshot 2024-04-23 142435](https://github.com/syedmokthiyar/Implementation-of-K-Means-Clustering-for-Customer-Segmentation/assets/118787294/ca703c4d-8756-4fd8-90a6-6161abbf7083)
 
 
 
